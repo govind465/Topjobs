@@ -1,0 +1,36 @@
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+
+      <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div>
+                  <img src="../../assets/image_male.png" alt="Dummy" class="example-element-diagram">
+                </div>
+                <div class="example-element-description">
+                  {{element.jobDescription}}
+        
+                </div>
+                <div style="margin-right: 5%">
+                  <mat-checkbox>Shortlist</mat-checkbox>
+                </div>
+      </div>
+      <div class="example-element-list" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <emp-candidate-list [init]="element['jobId']"></emp-candidate-list>  
+      </div>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+    [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

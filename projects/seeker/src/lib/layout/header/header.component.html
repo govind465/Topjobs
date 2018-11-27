@@ -1,0 +1,67 @@
+
+
+
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="http://placehold.it/300x60?text=Logo" width="150" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="[]"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              Home
+            </a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['resume']"
+              routerLinkActive="active">
+              <i class="ion-compose"></i>&nbsp;Create Resume
+            </a>
+          </li>
+    
+          <li class="nav-item">
+              <a class="nav-link"
+                [routerLink]="['jobs']"
+                routerLinkActive="active">
+                <i class="ion-"></i>&nbsp;Search Jobs
+              </a>
+            </li>
+    <!--
+            <li class="nav-item">
+                <a class="nav-link"
+                  [routerLink]="['profile']"
+                  routerLinkActive="active">
+                  <i class="fa fa"></i>&nbsp;Profile
+                </a>
+              </li>
+    
+    
+    
+    -->
+    
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['account']"
+              routerLinkActive="active">
+              <i class="ion-gear-a"></i>&nbsp;Logout
+            </a>
+          </li>
+    
+         
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,181 @@
+
+<mat-card>
+  <mat-card-title>
+
+    
+    <mat-card-header align="end">
+
+        <div class="row">
+
+          <div class="section-title">User details</div>
+     </div>
+    
+    </mat-card-header>
+    
+  </mat-card-title>
+
+
+
+
+  
+    
+ <mat-card-content>
+    
+      
+      <form [formGroup]="userDetailsForm" >
+        <mat-form-field class="full-width">
+          <input matInput placeholder="First Name" formControlName="firstname" required>
+          <mat-error *ngFor="let validation of validation_messages.firstname">
+            <mat-error class="error-message" *ngIf="userDetailsForm.get('firstname').hasError(validation.type) && (userDetailsForm.get('firstname').dirty || userDetailsForm.get('firstname').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Last Name" formControlName="lastname" required>
+          <mat-error *ngFor="let validation of validation_messages.lastname">
+            <mat-error class="error-message" *ngIf="userDetailsForm.get('lastname').hasError(validation.type) && (userDetailsForm.get('lastname').dirty || userDetailsForm.get('lastname').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Your birthday" formControlName="birthday" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngFor="let validation of validation_messages.birthday">
+            <mat-error class="error-message" *ngIf="userDetailsForm.get('birthday').hasError(validation.type) && (userDetailsForm.get('birthday').dirty || userDetailsForm.get('birthday').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Phone" type="number" formControlName="phone" required>
+          <mat-hint align="start"><strong>Mobile:</strong> {{ userDetailsForm.value.phone}}</mat-hint>
+          <mat-hint align="end"><strong>Fixed:</strong> {{ userDetailsForm.value.phone}}</mat-hint>
+          <mat-error *ngFor="let validation of validation_messages.phone">
+            <mat-error class="error-message" class="error-message" *ngIf="userDetailsForm.get('phone').hasError(validation.type) && (userDetailsForm.get('phone').dirty || userDetailsForm.get('phone').touched)">
+              {{ validation.message }}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+     
+        <br><br>
+       <div class="">
+         <mat-radio-group placeholder="Gender" class="radio-group" formControlName="gender">
+              <mat-radio-button class="full width" *ngFor="let x of genders" [value]="x">
+                {{x}}
+              </mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngFor="let validation of validation_messages.gender">
+            <mat-error class="error-message" *ngIf="userDetailsForm.get('gender').hasError(validation.type) && (userDetailsForm.get('gender').dirty || userDetailsForm.get('gender').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </div>
+      
+       <br><br>
+
+        <mat-form-field class="full-width">
+          <textarea matInput maxlength="256" placeholder="Profile" formControlName="bio" matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="6"></textarea>
+          <mat-hint align="start">Tell us about yourself</mat-hint>
+          <mat-hint align="end">{{userDetailsForm.get('bio').value.length}} / 256</mat-hint>
+          <mat-error *ngFor="let validation of validation_messages.bio">
+            <mat-error class="error-message" *ngIf="userDetailsForm.get('bio').hasError(validation.type) && (userDetailsForm.get('bio').dirty || userDetailsForm.get('bio').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+      <br><br>
+
+        <div formGroupName="address" >
+         
+          <mat-form-field class="full-width">
+             <input matInput placeholder="City" formControlName="city" >
+             <mat-error *ngFor="let validation of validation_messages.city">
+              <mat-error class="error-message" *ngIf="userDetailsForm.controls['address'].get('city').hasError(validation.type) && (userDetailsForm.controls['address'].get('city').dirty || userDetailsForm.controls['address'].get('city').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Zipcode" type="number" formControlName="zipcode">
+             <mat-hint align="start">6 digit code </mat-hint>
+             <mat-error *ngFor="let validation of validation_messages.zipcode">
+              <mat-error class="error-message" *ngIf="userDetailsForm.controls['address'].get('zipcode').hasError(validation.type) && (userDetailsForm.controls['address'].get('zipcode').dirty || userDetailsForm.controls['address'].get('zipcode').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          
+          </mat-form-field>
+         
+         <div class="row">
+        <mat-form-field class="full-width col-4">
+            <mat-select formControlName="country" placeholder="Country">
+              <mat-option *ngFor="let country of countries" [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-width col-4">
+            <mat-select formControlName="state" placeholder="States">
+              <mat-option *ngFor="let state of states" [value]="state">
+                {{ state }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+    </div>
+       
+
+     
+ 
+    
+
+        <mat-form-field class="full-width">
+          <input matInput maxlength="25" placeholder="Username" formControlName="username" required>
+          <mat-error *ngFor="let validation of account_validation_messages.username">
+            <mat-error class="error-message" *ngIf="userDetailsForm.get('username').hasError(validation.type) && (userDetailsForm.get('username').dirty || userDetailsForm.get('username').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput type="email" placeholder="Email" formControlName="email" required>
+          <mat-error *ngFor="let validation of account_validation_messages.email">
+            <mat-error class="error-message" *ngIf="userDetailsForm.get('email').hasError(validation.type) && (userDetailsForm.get('email').dirty || userDetailsForm.get('email').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+
+        
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Password" formControlName="password" required>
+            <mat-error *ngFor="let validation of account_validation_messages.password">
+              <mat-error class="error-message" *ngIf="userDetailsForm.get('password').hasError(validation.type) && (userDetailsForm.get('password').dirty || userDetailsForm.get('password').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Confirm Password" formControlName="confirm_password"  required>
+            <mat-error *ngFor="let validation of account_validation_messages.confirm_password">
+              <mat-error class="error-message" *ngIf="(userDetailsForm.get('confirm_password').invalid|| userDetailsForm.get('confirm_password').hasError(validation.type)) && (userDetailsForm.get('confirm_password').dirty || userDetailsForm.get('confirm_password').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+
+     
+        <mat-checkbox  formControlName="terms">
+          I accept terms and conditions
+        </mat-checkbox>
+        <mat-error   *ngFor="let validation of account_validation_messages.terms">
+          <mat-error  class="error-message" *ngIf="userDetailsForm.get('terms').hasError(validation.type) && (userDetailsForm.get('terms').dirty || userDetailsForm.get('terms').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+      
+      </form>
+       
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button class="submit-btn" color="primary" mat-raised-button [disabled]=!userDetailsForm.valid type="submit" (click)="onSubmit(userDetailsForm.value)">
+          Submit
+        </button>
+    </mat-card-actions>
+    
+    
+    
+</mat-card>
+

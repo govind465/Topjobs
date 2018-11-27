@@ -1,0 +1,38 @@
+.body{
+    content: '';
+    display: inline;
+    margin: 0;
+    padding: 0;
+    background: grey;
+}
+
+.mat-tab-nav-bar{
+  margin: 5em 20em;
+  width:20em;
+}
+
+.mat-card{
+  width: 25em;
+  margin: 5em 20em;
+  background: whitesmoke;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+.error {
+  color: red;
+}
+.error-msg {
+  display: block;
+  position: absolute;
+  font-size: 75%;
+  bottom: -2em;
+}
+.mat-form-field {
+  margin-bottom: .5em;
+}
+
+
+
+

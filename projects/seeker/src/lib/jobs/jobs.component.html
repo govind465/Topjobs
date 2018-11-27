@@ -1,0 +1,16 @@
+<mat-card>
+  
+  <mat-list dense style="margin:5em 15em;">
+    
+    <mat-list-item *ngFor="let job of jobs">
+      <h4 matLine> {{job.id}} </h4>
+      <p matLine> {{job.company}} </p>
+      <p matLine class="position"> {{job.position}} </p>
+      <p matLine >{{job.vaccancy}}</p>
+      <p matLine [routerLink]="['desc']">More Details</p>
+      <button matLine mat-stroked-button color="accent" style=" margin:1em 5em;width:20%;">Apply</button>
+    </mat-list-item>
+  
+  </mat-list>
+  
+  </mat-card>

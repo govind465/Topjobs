@@ -1,0 +1,27 @@
+.mat-card{
+    margin:2em auto;
+}
+
+.skilllist{
+width:25em;
+
+}
+
+mat-horizontal-stepper{
+    margin: 5em;
+}
+
+#basic{
+    content:'';
+    width:22em;
+    align-content: center;
+}
+.full-width {
+    content: '';
+    align-content: center;
+    margin: 0 2em;
+    display:block;
+    height: 5em;
+    width: 15em;
+  
+  }

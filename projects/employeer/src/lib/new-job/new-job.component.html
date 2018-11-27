@@ -1,0 +1,60 @@
+
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+     <mat-card-title>Post a Job</mat-card-title>
+      </mat-card-header>
+        
+      <mat-card-content>
+          <form [formGroup]="newJobForm" >
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Company Name" formControlName="companyname" required>
+                <mat-error *ngFor="let validation of validation_messages.companyname">
+                  <mat-error class="error-message" *ngIf="newJobForm.get('companyname').hasError(validation.type) && (newJobForm.get('companyname').dirty || newJobForm.get('companyname').touched)">{{validation.message}}</mat-error>
+                </mat-error>
+              </mat-form-field>
+               
+              <mat-form-field class="full-width">
+                  <input matInput placeholder="Job Profile" formControlName="position" required>
+                  <mat-error *ngFor="let validation of validation_messages.position">
+                    <mat-error class="error-message" *ngIf="newJobForm.get('position').hasError(validation.type) && (newJobForm.get('position').dirty || newJobForm.get('position').touched)">{{validation.message}}</mat-error>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input matInput type="number" placeholder="Vaccancy" formControlName="vaccancy" required>
+                    <mat-error *ngFor="let validation of validation_messages.vaccancy">
+                      <mat-error class="error-message" *ngIf="newJobForm.get('vaccancy').hasError(validation.type) && (newJobForm.get('vaccancy').dirty || newJobForm.get('vaccancy').touched)">{{validation.message}}</mat-error>
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="full-width col-4">
+                      <mat-select formControlName="location" placeholder="Location">
+                        <mat-option *ngFor="let location of Locations" [value]="location">
+                          {{ location}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+          
+
+                    <mat-form-field class="full-width">
+                        <textarea matInput maxlength="256" placeholder="Description" formControlName="desc" matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="6"></textarea>
+                        <mat-hint align="start">Describe more about the role</mat-hint>
+                        <mat-hint align="end">{{newJobForm.get('desc').value.length}} / 256</mat-hint>
+                        <mat-error *ngFor="let validation of validation_messages.desc">
+                          <mat-error class="error-message" *ngIf="newJobForm.get('desc').hasError(validation.type) && (newJobForm.get('desc').dirty || newJobForm.get('desc').touched)">{{validation.message}}</mat-error>
+                        </mat-error>
+                      </mat-form-field>
+
+
+
+            </form>
+      </mat-card-content>
+           <mat-card-actions align="end">
+              <button class="submit-btn" color="primary" mat-raised-button type="submit" (click)="onSubmit(newJobForm.value)">
+                  Submit
+                </button>
+           </mat-card-actions>
+
+  </mat-card>
+</div>

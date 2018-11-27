@@ -1,0 +1,96 @@
+
+   
+   .mat-card{
+    width: 25em;
+    margin: 4em 20em;
+    background: whitesmoke;
+   }
+                                      
+    .section-title {
+      margin-bottom: 20px;
+    }
+  
+    .user-details-container {
+      padding: 20px;
+      text-align: center;
+  
+    }
+     
+    .user-image {
+        width: 10%;
+        border-radius: 50%;
+      }
+  
+  .user-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 30px;
+        display: block;
+      }
+  
+      .user-bio {
+        font-size: 12px;
+        margin-top: 20px;
+        display: block;
+        color: rgba(0, 0, 0, 0.70);
+      }
+    
+  
+  
+  
+    .full-width {
+      content: '';
+      align-content: center;
+      margin: 0 2em;
+      display:block;
+      height: 5em;
+      width: 20em;
+    
+    }
+  
+    .error-message {
+      font-size: 12px;
+    }
+  
+    .double-line-hint {
+         
+    }
+
+   .mat-input-hint-wrapper {
+        flex-wrap: wrap;
+   }
+        
+   .hint-line {
+          flex: 0 0 100%;
+        }
+      
+
+  
+    .submit-btn {
+      margin-top: 20px;
+      margin-left: 40%;
+    }
+
+    
+  
+  form {
+      display: flex;
+      flex-direction: column;
+  }
+  .error {
+    color: red;
+  }
+  .error-msg {
+    display: block;
+    position: absolute;
+    font-size: 75%;
+    bottom: -2em;
+  }
+  .mat-form-field {
+    margin-bottom: .5em;
+  }
+
+  .mat-radio-button{
+    margin: 0 2em;
+  }
+  

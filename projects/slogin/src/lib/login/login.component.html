@@ -1,0 +1,49 @@
+
+<html>
+  <body>
+  
+    <div class="tabhead">
+   
+  </div>      
+  
+        
+         <mat-card>
+            <mat-card-title>Employeer
+            
+              <mat-card-header align="end">
+              
+              </mat-card-header>
+              
+            </mat-card-title>
+          
+            <mat-card-content>
+              <form [formGroup]="loginForm">
+                <mat-form-field [ngClass]="{'error': loginForm.controls['email'].errors && !loginForm.controls['email'].pristine}">
+                  <input type="text" matInput formControlName="email" placeholder="Username" required>
+                </mat-form-field>
+                  <!----
+                  <div *ngIf="loginForm.controls['email'].errors && !loginForm.controls['email'].pristine" class="error-msg">
+                    <mat-error *ngIf="loginForm.controls['email'].errors.required">Email is required.</mat-error>
+                    <mat-error *ngIf="!loginForm.controls['email'].errors.pattern">Email is invalid.</mat-error>
+                  </div>
+                
+                -->
+                <mat-form-field [ngClass]="{'error': loginForm.controls['password'].errors && !loginForm.controls['password'].pristine}">
+                
+                  <input type="password" matInput formControlName="password" placeholder="Password" required>
+                  <div *ngIf="loginForm.controls['password'].errors && !loginForm.controls['password'].pristine" class="error-msg">
+                    <mat-error *ngIf="!loginForm.controls['password'].errors.required">Password is required.</mat-error>
+                  </div>
+                </mat-form-field>
+              </form>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-raised-button class="btn"  type="submit" [disabled]=!loginForm.valid (click)="onSubmit(loginForm.value)">Login</button>
+            </mat-card-actions>
+          
+          </mat-card>
+      
+  
+    <router-outlet></router-outlet>
+  </body>
+  </html>

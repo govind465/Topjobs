@@ -1,0 +1,94 @@
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <h3>Registration Form</h3>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+                 
+                
+                <div class="form-group">
+                      <label>First Name</label>
+                      <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                      <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                          <div *ngIf="f.firstName.hasError('pattern')"><b>First letter must be capital and rest must be small case, No space in between</b></div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Last Name</label>
+                      <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                      <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                          <div *ngIf="f.lastName.hasError('pattern')"><b>First letter must be capital and rest must be small case, No space in between</b></div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                        <label>Please select your gender</label>
+                        <br>
+                        <label class="md-check" style="margin-right:5%">
+                                <input type="radio" value="male" name="gender" formControlName="gender"  checked>     
+                                Male
+                              </label>
+                          <label class="md-check" >
+                        <input type="radio" value="female" name="gender" formControlName="gender" >
+                             Female
+                          </label>
+                          
+                      
+                      </div>
+                  <div class="form-group">
+                        <label for="contry">Country</label>
+                        <select class="form-control" id="contry" formControlName="country">
+                          <option *ngFor="let contry of countries" [value]="contry.name">{{contry.name}}</option>
+                        </select>
+                      </div>
+
+                  <div class="form-group">
+                      <label>Email</label>
+                      <input type="text" formControlName="emailId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+                      <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+                          <div *ngIf="f.emailId.errors.required">Email is required</div>
+                          <div *ngIf="f.emailId.errors.email">Email must be a valid email address</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" formControlName="password" class="form-control" />
+                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                          <div *ngIf="f.password.errors.required">Password is required</div>
+                          <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+                          <div *ngIf="f.password.errors.pattern">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</div>         
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label>Confirm Password</label>
+                      <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                          <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                          <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div style="margin-right:90%;width:25px;height: 25px;">
+                    <input type="checkbox" formControlName="terms" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.terms.errors }" />
+                      </div>
+                <span>I accept the terms and condition</span>
+                    <div *ngIf="submitted && f.terms.errors" class="invalid-feedback">
+                        <div *ngIf="f.terms.errors.required">please tick</div>
+                    </div>
+                </div>
+                
+
+                  <div class="form-group">
+                      <button class="btn btn-primary" type="submit" (ngSubmit)="onSubmit(registerForm.value)">Register</button>
+                      <button class="btn btn-warning" (click)="logInComp()" >Log In</button>
+                    
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!--[routerLink]="['signup']"-->

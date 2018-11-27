@@ -1,0 +1,256 @@
+<mat-horizontal-stepper labelPosition="bottom" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Basic Info</ng-template>
+
+      <mat-card id="basic">
+        <mat-card-title>
+        </mat-card-title>
+        <mat-card-header align="end">
+          <div class="row">
+
+            <div class="col-2">
+              <div class="user-details-container">
+                <img class="user-image" src="https://randomuser.me/api/portraits/lego/3.jpg" style="height: 100px;" />
+
+              </div>
+            </div>
+          </div>
+              
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="userDetailsForm" >
+            <mat-form-field class="full-width">
+              <input matInput placeholder="First Name" formControlName="firstname">
+              
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <input matInput [matDatepicker]="picker" placeholder="Your birthday" formControlName="birthday" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+             
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Phone" type="number" formControlName="phone" required>
+              <mat-hint align="start"><strong>Mobile:</strong> {{ userDetailsForm.value.phone}}</mat-hint>
+              <mat-hint align="end"><strong>Fixed:</strong> {{ userDetailsForm.value.phone}}</mat-hint>
+             
+            </mat-form-field>
+
+            <div class="">
+              <mat-radio-group placeholder="Gender" class="radio-group" formControlName="gender">
+                   <mat-radio-button class="full width" *ngFor="let x of genders" [value]="x">
+                     {{x}}
+                   </mat-radio-button>
+                   </mat-radio-group>
+                 
+             </div>
+
+             <mat-form-field class="full-width">
+              <input matInput type="email" placeholder="Email" formControlName="email" required>
+              
+            </mat-form-field>
+           </form> 
+
+        </mat-card-content>
+      </mat-card>
+
+
+
+
+
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Education Details</ng-template>
+
+      <mat-card>
+        <mat-card-title>Education Details
+        </mat-card-title>
+        <mat-card-header align="end">
+            Reload data:
+            <button mat-icon-button (click)="refresh()">
+              <mat-icon>refresh</mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+
+          
+            
+        
+
+          <div class="container mat-elevation-z8">
+
+            <div class="form">
+              <mat-form-field floatPlaceholder="never" color="accent">
+                <input matInput #filter placeholder="Filter issues">
+              </mat-form-field>
+            </div>
+
+            <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+              <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Degree</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Board</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="state">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Institute</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.state}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="url">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Score</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.url}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="created_at">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.created_at}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="updated_at">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.updated_at}}</mat-cell>
+              </ng-container>
+
+              <!-- actions -->
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>
+                  <button mat-icon-button color="primary" (click)="addNew()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                  </button>
+                </mat-header-cell>
+
+                <mat-cell *matCellDef="let row; let i=index;">
+                  <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                  </button>
+
+                  <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+
+
+            <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+              No results
+            </div>
+
+            <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+          </div>
+
+
+
+
+
+
+
+
+
+<!--chip auto complete-->
+
+
+
+          <mat-card>
+            <mat-card-title>SkillSet</mat-card-title>
+            <mat-card-content>
+
+              <mat-form-field class="skilllist">
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let skill of skills" [selectable]="selectable" [removable]="removable" (removed)="remove(skill)">
+                    {{skill}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Add SKill" #fruitInput [formControl]="skillCtrl" [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                    {{skill}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+
+
+        </mat-card-content>
+      </mat-card>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Experience Details</ng-template>
+
+      <mat-card *ngFor="let item of allItems" class="flex-lg-20" >
+
+        <mat-card-header class="flex-lg-20">
+          <h2>{{item.itemName}}</h2>
+          <br>
+        </mat-card-header>
+        <mat-card-content class="flex-lg-20">
+          <h2>   </h2>
+          <br>{{item.itemImageUrl}}
+        </mat-card-content>
+      
+        <mat-card-content align="bottom" class="flex-lg-20">
+          <div>Rs. {{item.itemPrice}}</div>
+      
+        </mat-card-content>
+         </mat-card>
+         
+
+
+
+
+
+
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    Forms Submitted Successfully
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
