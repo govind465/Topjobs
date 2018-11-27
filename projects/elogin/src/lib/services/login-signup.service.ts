@@ -20,7 +20,7 @@ const httpOptions={
 export class LoginSignupService {
 
   constructor(private http : HttpClient) { } 
-  private userUrl = 'http://localhost:8765/employee-registration';
+  private userUrl = '/employee-registration';
 
   public requestLogin(email,password) {
   //  alert(this.userUrl+"/login/"+email);
